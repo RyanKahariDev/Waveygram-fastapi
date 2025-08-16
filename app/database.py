@@ -3,11 +3,21 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import urllib.parse
 from .config import settings
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is not set")
 # import psycopg2
 # from psycopg2.extras import RealDictCursor
 # import time
 # SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'
-SQLALCHEMY_DATABASE_URL = settings.database_url
+SQLALCHEMY_DATABASE_URL = DATABASE_URL
 # urllib.parse.quote_plus("@")
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
