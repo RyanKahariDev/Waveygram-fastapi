@@ -19,11 +19,12 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.add_column('posts', sa.Column('owner_id', sa.Integer, nullable=False))
-    op.create_foreign_key('posts_users_fk', source_table='posts', referent_table='users', local_cols=[
-                          'owner_id'], remote_cols=['id'], ondelete="CASCADE")
+    op.create_table(
+        "posts",
+        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("title", sa.String, nullable=False)
+    )
 
 
 def downgrade() -> None:
-    op.drop_constraint('posts_users_fkey', table_name='posts')
-    op.drop_column('posts', 'owner_id')
+    op.drop_table('posts')
