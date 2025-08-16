@@ -1,3 +1,4 @@
+import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -12,7 +13,9 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int
     database_url: str
 
-    model_config = SettingsConfigDict(env_file=".env")
+    class config:
+        # model_config = SettingsConfigDict(env_file=".env")
+        env_file = ".env" if os.getenv("ENV") != "prod" else None
 
 
 settings = Settings()
