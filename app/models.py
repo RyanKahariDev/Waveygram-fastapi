@@ -4,6 +4,8 @@ from sqlalchemy.sql.expression import null, text
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.orm import relationship
 
+Base = Base
+
 
 class Post(Base):
     __tablename__ = "posts"
