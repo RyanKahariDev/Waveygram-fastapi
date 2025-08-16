@@ -1,17 +1,15 @@
-from logging.config import fileConfig
-
-from app.database import Base
-from app.config import settings
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-from app import models
-
-
-from alembic import context
-
-
-import os
 from dotenv import load_dotenv
+from alembic import context
+from app import models
+from sqlalchemy import pool
+from sqlalchemy import engine_from_config
+from app.config import settings
+from app.database import Base
+from logging.config import fileConfig
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 
 load_dotenv()
 
